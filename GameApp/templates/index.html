@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Início{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Coluna principal: últimos jogos -->
+    <div class="col-md-8">
+        <div class="alert alert-info shadow-sm">
+            <h4>Bem-vindo ao <strong>GameReview</strong>!</h4>
+            <p>Cadastre jogos, desenvolvedoras e reviews. Explore seu banco de dados e faça buscas personalizadas.</p>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Últimos jogos cadastrados</h5>
+                {% if ultimos_jogos %}
+                <ul class="list-group list-group-flush">
+                    {% for jogo in ultimos_jogos %}
+                    <li class="list-group-item">
+                        <strong>{{ jogo.titulo }}</strong> – {{ jogo.genero }} ({{ jogo.ano_lancamento }})<br>
+                        <small class="text-muted">Desenvolvedora: {{ jogo.desenvolvedora.nome }}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted">Nenhum jogo cadastrado ainda.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Coluna lateral: resumo + botões -->
+    <div class="col-md-4">
+        <div class="card text-bg-light shadow-sm mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Resumo</h5>
+                <p><strong>{{ total_jogos }}</strong> jogos cadastrados</p>
+                <p><strong>{{ total_desenvolvedoras }}</strong> desenvolvedoras</p>
+                <p><strong>{{ total_reviews }}</strong> reviews</p>
+            </div>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="d-grid gap-2">
+            <a href="{% url 'adicionar_jogo' %}" class="btn btn-primary">+ Cadastrar Jogo</a>
+            <a href="{% url 'adicionar_desenvolvedora' %}" class="btn btn-secondary">+ Cadastrar Desenvolvedora</a>
+            <a href="{% url 'adicionar_review' %}" class="btn btn-success">+ Cadastrar Review</a>
+            <a href="{% url 'buscar_jogo' %}" class="btn btn-dark">🔍 Buscar Jogo</a>
+            <a href="{% url 'listar_reviews' %}" class="btn btn-outline-dark">📋 Ver Reviews</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Reviews Cadastradas{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Lista de Reviews</h2>
+
+    {% if reviews %}
+    <div class="list-group">
+        {% for review in reviews %}
+        <div class="list-group-item list-group-item-action mb-2">
+            <h5 class="mb-1">
+                {{ review.jogo.titulo }} —
+                <span class="badge bg-success">Nota: {{ review.nota }}</span>
+            </h5>
+            <p class="mb-1">{{ review.comentario }}</p>
+            <small class="text-muted">
+                Autor: {{ review.autor }} |
+                Criado em: {{ review.data_criacao|date:"d/m/Y H:i" }}
+            </small>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted">Nenhum review cadastrado ainda.</p>
+    {% endif %}
+</div>
+{% endblock %}
