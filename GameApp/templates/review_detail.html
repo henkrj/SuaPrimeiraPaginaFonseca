@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ review.jogo.titulo }} - Review{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">
+        <h5>{{ review.jogo.titulo }} - por {{ review.autor }}</h5>
+        <small>{{ review.data_criacao|date:"d/m/Y H:i" }}</small>
+    </div>
+    <div class="card-body">
+        {{ review.descricao|safe }}
+    </div>
+</div>
+<a href="{% url 'listar_reviews' %}" class="btn btn-outline-secondary">
+    <i class="bi bi-arrow-left-circle"></i> Voltar
+</a>
+{% endblock %}

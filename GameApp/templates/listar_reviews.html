@@ -13,11 +13,16 @@
                 {{ review.jogo.titulo }} —
                 <span class="badge bg-success">Nota: {{ review.nota }}</span>
             </h5>
-            <p class="mb-1">{{ review.comentario }}</p>
+            <p class="mb-1">{{ review.comentario|truncatechars:120 }}</p>
             <small class="text-muted">
                 Autor: {{ review.autor }} |
                 Criado em: {{ review.data_criacao|date:"d/m/Y H:i" }}
             </small>
+            <div class="mt-2">
+                <a href="{% url 'review_detail' review.pk %}" class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-eye"></i> Leia mais
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>

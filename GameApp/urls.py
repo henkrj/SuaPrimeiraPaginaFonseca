@@ -1,12 +1,33 @@
 from django.urls import path
-from . import views
+from .views import (
+    AdicionarJogoView,
+    AdicionarDesenvolvedoraView,
+    AdicionarReviewView,
+    buscar_jogo,
+    listar_reviews,
+    index,
+    registro_view,
+    login_view,
+    logout_view,
+    profile_view,
+    editar_profile_view,
+    AboutView,
+    ReviewDetailView
+)
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('desenvolvedora/', views.adicionar_desenvolvedora, name='adicionar_desenvolvedora'),
-    path('jogo/', views.adicionar_jogo, name='adicionar_jogo'),
-    path('review/', views.adicionar_review, name='adicionar_review'),
-    path('buscar/', views.buscar_jogo, name='buscar_jogo'),
-    path('reviews/', views.listar_reviews, name='listar_reviews'),
+    path('', index, name='index'),
+    path('jogo/', AdicionarJogoView.as_view(), name='adicionar_jogo'),
+    path('desenvolvedora/', AdicionarDesenvolvedoraView.as_view(), name='adicionar_desenvolvedora'),
+    path('review/', AdicionarReviewView.as_view(), name='adicionar_review'),
+    path('buscar/', buscar_jogo, name='buscar_jogo'),
+    path('reviews/', listar_reviews, name='listar_reviews'),
+    path('register/', registro_view, name='register'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('profile/', profile_view, name='profile'),
+    path('editar-perfil/', editar_profile_view, name='edit_profile'),
+    path('about/', AboutView.as_view(), name='about'),
+    path('review/<int:pk>/', ReviewDetailView.as_view(), name='review_detail'),
 
 ]

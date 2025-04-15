@@ -14,6 +14,7 @@ class JogoAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('jogo', 'autor', 'nota')
-    list_filter = ('nota',)
-    search_fields = ('jogo__titulo', 'autor')
+    list_display = ('jogo', 'autor', 'nota', 'data_criacao')
+    list_filter = ('nota', 'data_criacao')
+    search_fields = ('jogo__titulo', 'autor', 'comentario')
+

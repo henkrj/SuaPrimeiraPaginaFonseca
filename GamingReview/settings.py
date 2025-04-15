@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'GameApp',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Redirecionamentos após login/logout
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+
+# Configuração de arquivos de mídia (já feita, mas recapitulando)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
