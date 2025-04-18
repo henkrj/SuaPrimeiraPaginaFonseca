@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Detalhe da Mensagem{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4"><i class="bi bi-envelope-open"></i> Mensagem Recebida</h2>
+
+    <p><strong>De:</strong> {{ mensagem.remetente.username }}</p>
+    <p><strong>Enviada em:</strong> {{ mensagem.data_envio|date:"d/m/Y H:i" }}</p>
+
+    <hr>
+
+    <p>{{ mensagem.conteudo|linebreaks }}</p>
+
+    <hr class="my-4">
+
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'caixa_entrada' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Voltar
+        </a>
+        <a href="{% url 'responder_mensagem' mensagem.remetente.pk %}" class="btn btn-dark">
+            <i class="bi bi-reply"></i> Responder
+        </a>
+    </div>
+</div>
+{% endblock %}

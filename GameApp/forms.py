@@ -2,7 +2,7 @@ from django import forms
 from .models import Jogo, Desenvolvedora, Review
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Mensagem
 
 class JogoForm(forms.ModelForm):
     class Meta:
@@ -14,7 +14,7 @@ class JogoForm(forms.ModelForm):
         titulo = cleaned_data.get('titulo')
         ano_lancamento = cleaned_data.get('ano_lancamento')
 
-        if Jogo.objects.filter(titulo__iexact=titulo, ano=ano_lancamento).exists():
+        if Jogo.objects.filter(titulo__iexact=titulo, ano_lancamento=ano_lancamento).exists():
             raise forms.ValidationError("Este jogo já foi cadastrado com esse ano.")
         return cleaned_data
     
@@ -44,7 +44,7 @@ class DesenvolvedoraForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = '__all__'
+        fields = ['jogo', 'nota', 'comentario']
 
 class BuscaJogoForm(forms.Form):
     termo = forms.CharField(label='Buscar por título')
@@ -57,7 +57,16 @@ class RegistroForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 class ProfileForm(forms.ModelForm):
+    nascimento = forms.DateField(
+        input_formats=['%d/%m/%Y'],
+        widget=forms.DateInput(format='%d/%m/%Y', attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = Profile
         fields = ['avatar', 'bio', 'nascimento']
-    
+
+class MensagemForm(forms.ModelForm):
+    class Meta:
+        model = Mensagem
+        fields = ['destinatario', 'assunto', 'corpo']

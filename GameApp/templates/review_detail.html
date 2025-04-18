@@ -1,18 +1,42 @@
 {% extends 'base.html' %}
-
-{% block title %}{{ review.jogo.titulo }} - Review{% endblock %}
+{% block title %}Detalhes da Review{% endblock %}
 
 {% block content %}
-<div class="card mb-4">
-    <div class="card-header bg-dark text-white">
-        <h5>{{ review.jogo.titulo }} - por {{ review.autor }}</h5>
-        <small>{{ review.data_criacao|date:"d/m/Y H:i" }}</small>
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">{{ review.jogo.titulo }}</h2>
+
+    <div class="mb-3">
+        <strong>Nota:</strong>
+        <span class="badge bg-success">{{ review.nota }}</span>
     </div>
-    <div class="card-body">
-        {{ review.descricao|safe }}
+
+    <div class="mb-3">
+        <strong>Comentário:</strong>
+        <div class="border rounded p-3 bg-light">
+            {{ review.comentario|linebreaks }}
+        </div>
+    </div>
+
+    <div class="mb-3 text-muted">
+        <strong>Autor:</strong> {{ review.autor }}<br>
+        <strong>Criado em:</strong> {{ review.data_criacao|date:"d/m/Y H:i" }}
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'listar_reviews' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Voltar
+        </a>
+
+        {% if user.is_authenticated and user.username == review.autor %}
+        <div class="d-flex justify-content-end gap-2">
+            <a href="{% url 'editar_review' review.pk %}" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil-square"></i> Editar
+            </a>
+            <a href="{% url 'excluir_review' review.pk %}" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i> Excluir
+            </a>
+        </div>
+        {% endif %}
     </div>
 </div>
-<a href="{% url 'listar_reviews' %}" class="btn btn-outline-secondary">
-    <i class="bi bi-arrow-left-circle"></i> Voltar
-</a>
 {% endblock %}

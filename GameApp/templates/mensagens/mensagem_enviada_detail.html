@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Mensagem para {{ mensagem.destinatario.username }}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4 d-flex align-items-center gap-2">
+        <i class="bi bi-envelope-paper"></i> Mensagem Enviada
+    </h2>
+
+    <div class="mb-3">
+        <strong>Para:</strong> {{ mensagem.destinatario.username }}
+    </div>
+
+    <div class="mb-3">
+        <strong>Assunto:</strong> {{ mensagem.assunto }}
+    </div>
+
+    <div class="mb-3">
+        <strong>Enviada em:</strong> {{ mensagem.data_envio|date:"d/m/Y H:i" }}
+    </div>
+
+    <div class="mb-4 border rounded p-3 bg-light">
+        <strong>Mensagem:</strong>
+        <p class="mt-2 mb-0">{{ mensagem.corpo }}</p>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'caixa_saida' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Voltar para Enviadas
+        </a>
+        <a href="{% url 'responder_mensagem' mensagem.destinatario.pk %}" class="btn btn-dark">
+            <i class="bi bi-reply-fill"></i> Reenviar
+        </a>
+    </div>
+</div>
+{% endblock %}

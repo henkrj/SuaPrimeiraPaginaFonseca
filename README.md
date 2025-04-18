@@ -1,27 +1,34 @@
 # 🎮 GameReview
 
-Bem-vindo ao **GameReview**, um site simples e direto para cadastrar jogos, Desenvolvedoras e escrever reviews! Este projeto foi desenvolvido como parte de um curso de Django, focando em aplicar o padrão MTV e os principais recursos da framework.
+Bem-vindo ao GameReview, uma plataforma web para cadastro de jogos, reviews e perfis de usuários. Este projeto foi desenvolvido em Django com foco em aprendizado e prática dos principais conceitos do framework, incluindo autenticação, herança de templates, CBVs, CRUD completo, mensagens entre usuários e muito mais.
+
 
 ---
 
-## 💡 O que você encontra aqui:
+## 📌 Funcionalidades
 
-- Cadastro de **Desenvolvedoras**
-- Cadastro de **Jogos**, linkando com a desenvolvedora
-- Cadastro de **Reviews** com nota, comentário e autor
-- Um campo de busca para encontrar jogos pelo título
-- Listagem das Reviews feitas
-- Interface bonitinha com Bootstrap
-- Painel administrativo via Django Admin
+- Cadastro de Desenvolvedoras
+- Cadastro de Jogos (verifica duplicidade por título e ano)
+- Cadastro de Reviews com nota, jogo e comentário
+- Página inicial com resumo e últimos jogos adicionados
+- Página "Sobre Mim"
+- Sistema de autenticação com registro, login, logout
+- Perfis de usuários com edição de avatar, bio e data de nascimento
+- Envio de mensagens entre usuários com caixa de entrada e saída
+- Proteção de visualizações com login obrigatório
+- Templates personalizados com Bootstrap 5 e ícones
 
 ---
+
 
 ## 🧰 Tecnologias usadas
 
 - Python 3.13
 - Django 5.1
-- SQLite (banco de dados padrão do Django)
-- Bootstrap 5 + Bootstrap Icons
+- SQLite
+- Bootstrap 5
+- CKEditor (para campos de texto ricos)
+- HTML, CSS
 
 ---
 
@@ -81,17 +88,24 @@ Bem-vindo ao **GameReview**, um site simples e direto para cadastrar jogos, Dese
 ## 🗂️ Estrutura do projeto
 
 ```
-ProjetoGameReview/
-├── GameApp/
-│   ├── templates/GameApp/
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   └── urls.py
-├── ProjetoGameReview/
-│   └── settings.py
-├── db.sqlite3
-└── manage.py
+GameReview/
+│
+├── GameApp/                  # App principal
+│   ├── templates/            # Templates HTML
+│   ├── static/               # Arquivos estáticos (imagens, css, etc.)
+│   ├── models.py             # Modelos (Jogo, Desenvolvedora, Review, Mensagem, Profile)
+│   ├── views.py              # Views (com CBVs e FBVs)
+│   ├── forms.py              # Formulários
+│   └── urls.py               # URLs da aplicação
+│
+├── GamingReview/             # Projeto Django
+│   ├── settings.py           # Configurações do Django (inclui MEDIA e STATIC)
+│   └── urls.py               # URLs principais
+│
+├── media/                    # Avatares de usuários (ignorado no git)
+├── db.sqlite3                # Banco de dados (ignorado no git)
+├── requirements.txt          # Dependências do projeto
+└── README.md                 # Você está aqui :)
 ```
 
 ---

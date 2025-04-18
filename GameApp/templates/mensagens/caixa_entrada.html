@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Caixa de Entrada{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4 d-flex align-items-center gap-2">
+        <i class="bi bi-inbox"></i> Caixa de Entrada
+    </h2>
+
+    {% if mensagens %}
+    <div class="list-group">
+        {% for mensagem in mensagens %}
+        <a href="{% url 'mensagem_detail' mensagem.pk %}"
+            class="list-group-item list-group-item-action mb-2 {% if not mensagem.lida %}bg-light fw-bold{% endif %}">
+            <div class="d-flex justify-content-between">
+                <span>📩 {{ mensagem.assunto }}</span>
+                <small>{{ mensagem.data_envio|date:"d/m/Y H:i" }}</small>
+            </div>
+            <div>
+                <small>De: {{ mensagem.remetente.username }}</small>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted">Você ainda não recebeu mensagens.</p>
+    {% endif %}
+</div>
+{% endblock %}
